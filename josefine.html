@@ -1,0 +1,920 @@
+<html>
+  <head>
+    <!--
+      Vi är då, nu och sen
+    -->
+    <title>Vi ses snart igen!</title>
+
+    <meta charset="UTF-8" />
+
+    <!-- Delningstaggar: -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="Vi ses snart igen!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://visessnartigen.se/" />
+    <meta
+      property="og:description"
+      content="Hammarby Fotbolls framtid är mycket, mycket oviss. Därför uppmanar vi dig som säsongskortsinnehavare att stå kvar."
+    />
+    <meta property="og:image" content="https://visessnartigen.se/ogimg.png" />
+
+    <!-- Klassisk font. -->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        padding: 0 0 0 0;
+        margin: 0 0 0 0;
+      }
+      body {
+        font-family: "Libre Franklin", sans-serif;
+        background-image: url("bg.jpg");
+        background-size: 100%;
+      }
+
+      /*
+         Toppbaren
+      */
+
+      #topbar {
+        background-color: rgba(255, 255, 255, 0.85);
+
+        position: fixed;
+        top: -60px;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+        font-size: 16px;
+        line-height: 60px;
+        font-weight: 700;
+
+        z-index: 10;
+      }
+      #topbar span {
+        padding-left: 20px;
+      }
+      #topbar img {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        height: 40px;
+      }
+
+      /*
+         Rubbe
+      */
+
+      h1 {
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+      h1 span {
+        display: none;
+      }
+      h1 img {
+        -webkit-box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.75);
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        cursor: pointer;
+      }
+
+      /*
+         Omnipresent
+      */
+
+      #soderstadion {
+        margin: 0px auto;
+        padding: 0px 20px;
+        max-width: 1200px;
+      }
+
+      /*
+         VD i bolaget
+      */
+
+      #kindlund {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 80vh;
+        -webkit-box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.75);
+      }
+
+      #kindlund iframe {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+
+      /*
+         Generiska innehållsboxar (med vit halvtransparent bakgrund).
+      */
+
+      .mjolkvatten {
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 60px 100px;
+        margin: 150px 0px 0px 0px;
+      }
+
+      /*
+         Jag står kvar!
+          - formuläret
+      */
+
+      #jagstarkvar {
+        display: grid;
+        grid-template-columns: 50% 50%;
+      }
+      #jagstarkvar span {
+        padding: 0px 0px 15px 0px;
+      }
+      #jagstarkvar label {
+        line-height: 30px;
+        text-align: right;
+        padding: 0px 10px 0px 0px;
+      }
+      #jagstarkvar #gdpr {
+        display: grid;
+        grid-template-columns: 30px auto;
+      }
+      #jagstarkvar #gdpr label {
+        line-height: 20px;
+        text-align: left;
+        font-size: 80%;
+        padding: 7px 0px 0px 10px;
+      }
+      #jagstarkvar input {
+        line-height: 30px;
+        height: 30px;
+        background-color: #eeece9;
+        padding: 0px 10px;
+        width: 100%;
+      }
+      #jagstarkvar .validation {
+        grid-column: 1 / 3;
+        text-align: right;
+        font-size: 80%;
+        color: #cc0000;
+        padding: 0px 0px 0px 20px;
+      }
+
+      /*
+         Wrappar säsongskortsbilden och formuläret:
+      */
+
+      #sasongsplatochform {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        padding: 50px 0px 0px 0px;
+      }
+
+      /*
+         Säsongsplåten
+           - bilden
+      */
+
+      #sasongsplat {
+        -webkit-box-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.75);
+        border-radius: 10px;
+        transform: rotate(-2deg);
+        width: 100%;
+      }
+
+      /*
+         Wrappar räknaren och knappen
+      */
+
+      #progressochknappen {
+        display: grid;
+        grid-template-columns: 70% 30%;
+      }
+
+      /*
+         "Varför ska du trycka på knappen?"
+      */
+
+      #knappen {
+        width: 170px;
+        -webkit-box-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.75);
+        border-radius: 50%;
+        margin: 0px 20px 0px auto;
+        filter: grayscale(80%);
+      }
+      #knappen.active {
+        cursor: pointer;
+        filter: none;
+      }
+
+      /*
+         Räknaren (antalet som står kvar)
+      */
+
+      div#barometern {
+        padding: 80px 0px 80px 0px;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 20px;
+      }
+      div#barometern span {
+        vertical-align: middle;
+      }
+      div#barometern span {
+        vertical-align: baseline;
+      }
+      div#barometern img {
+        margin: 0px 0px 0px 5px;
+        padding: 0px 0px 5px 0px;
+        height: 30px;
+        vertical-align: middle;
+      }
+
+      /*
+         Nerräknare till topphemligt släpp 09:00 på lördag.
+      */
+
+      div#tidaholm {
+        position: relative;
+        color: #fff;
+        text-align: center;
+        font-size: 100px;
+        font-weight: 700;
+      }
+      div#tidaholm img {
+        width: 100%;
+      }
+      div#tidaholm div#sistakvarten {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /*
+         Tack efter att man reggat sig.
+      */
+
+      #grazimille {
+        display: none;
+      }
+
+      /*
+         Supporterinitiativen...
+      */
+
+      #supporterinitiativ {
+        margin-bottom: 140px;
+      }
+
+      /*
+         Responsiva anpassningar
+      */
+
+      @media only screen and (max-width: 1000px) {
+        .mjolkvatten {
+          padding: 20px 40px;
+        }
+
+        #jagstarkvar {
+          display: grid;
+          grid-template-columns: 100%;
+        }
+        #jagstarkvar {
+          display: block;
+        }
+        #sasongsplatochform {
+          display: grid;
+          grid-template-columns: 100%;
+          padding: 20px 0px 0px 0px;
+        }
+        #jagstarkvar {
+          margin-top: 40px;
+        }
+        #knappen {
+          margin: 0px auto;
+        }
+        div#barometern {
+          grid-row: 2;
+          padding: 30px 0px;
+          text-align: right;
+        }
+        #progressochknappen {
+          display: grid;
+          grid-template-columns: 100%;
+        }
+        div#tidaholm {
+          font-size: 40px;
+        }
+        #jagstarkvar .validation {
+          text-align: left;
+          display: block;
+          padding: 0px;
+        }
+        #gdpr {
+          padding-top: 10px;
+        }
+      }
+      @media only screen and (max-width: 400px) {
+        .mjolkvatten {
+          padding: 5px 20px;
+        }
+      }
+      @media only screen and (max-width: 1000px) {
+        #sasongsplatochform {
+          max-width: 470px;
+          margin: 0px auto;
+        }
+      }
+
+      /*
+         Div utanför synlig yta där vi lägger bilder som behöver preloadas
+         till webbläsarens cache.
+      */
+
+      #preload {
+        position: absolute;
+        top: -1000px;
+        left: -1000px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="topbar">
+      <img src="logo.png" />
+      <span>Vi ses snart igen!</span>
+    </div>
+
+    <div id="soderstadion">
+      <!-- Container för rubbet -->
+
+      <h1>
+        <!-- This is Söderstadion-skylten -->
+        <span>Vi ses snart igen!</span><img src="title.jpg" id="titleButton" />
+      </h1>
+
+      <!-- Kindlunds videospelare -->
+      <div id="kindlund">
+        <div id="player"></div>
+        <!-- #player populeras av JavaScript -->
+      </div>
+
+      <div class="mjolkvatten" id="formblock">
+        <h2>Varför ska du trycka på knappen?</h2>
+        <p>
+          Hammarby Fotbolls framtid är mycket, mycket oviss. Situationen som
+          råder - med en uppskjuten säsong och oklarheter kring när vi kan
+          tillåtas att spela matcher med publik igen – gör att vi från klubbens
+          håll måste planera och förbereda oss på att det värsta kan inträffa.
+          Det skulle kunna innebära att en hel säsong spelas utan publik på
+          läktarna.
+        </p>
+        <p>
+          Intäkterna från säsongskorten är klubbens enskilt största intäktspost
+          och om vi ska klara oss ur den här krisen så är de också helt
+          nödvändiga.
+        </p>
+        <p>
+          Därför uppmanar vi dig som säsongskortsinnehavare att stå kvar. Genom
+          att aktivt ta beslutet att stå fast vid ditt säsongskort – oavsett hur
+          många matcher som kommer att spelas utan publik den här säsongen, vare
+          sig det är på Tele2 Arena eller Hammarby IP. Vi förstår att det är
+          mycket begärt men vi hoppas att vi har din förståelse för en situation
+          ingen av oss kunde förutse.
+        </p>
+        <p>
+          <b
+            >För att vi ska kunna planera klubbens framtid och få en bild av
+            vilka åtgärder vi behöver vidta framåt så behöver vi ha ditt svar
+            senast den 30 juni. Fyll i dina uppgifter nedan och tryck på knappen
+            för att visa att du står kvar vid ditt köp av det viktigaste
+            säsongskortet i klubbens historia.</b
+          >
+        </p>
+        <p>
+          Parallellt med att vidta alla åtgärder vi kan för att ta klubben ur
+          det här läget på bästa sätt så kommer vi löpande under året jobba för
+          att visa vår uppskattning till dig som säsongskortsinnehavare.
+        </p>
+        <p>Tack!</p>
+        <div id="sasongsplatochform">
+          <img id="sasongsplat" src="sasongsplat.png" />
+
+          <!-- Jag står kvar!-formuläret: -->
+          <form id="jagstarkvar">
+            <label for="name">För- och efternamn:</label><input id="name" />
+            <span id="nameValidation" class="validation"></span>
+            <label for="email">Mailadress:</label><input id="email" />
+            <span id="emailValidation" class="validation"></span>
+            <label for="customer">Kundnummer:</label><input id="customer" />
+            <span id="customerValidation" class="validation"></span>
+            <label for="card">Kortnummer:</label><input id="card" />
+            <span id="cardValidation" class="validation"></span>
+            <span></span>
+            <div id="gdpr">
+              <input type="checkbox" id="gdprbox" /><label for="gdprbox"
+                >Jag godkänner att mina uppgifter hanteras enligt
+                <a
+                  href="https://www.hammarbyfotboll.se/biljetter/integritetspolicy/"
+                  target="_blank"
+                  >integritetspolicyn</a
+                >.</label
+              >
+            </div>
+          </form>
+        </div>
+
+        <div id="progressochknappen">
+          <div id="barometern">
+            <span><span id="barometersiffra">0</span> av 16430</span>
+            <img src="starkvar.png" />
+          </div>
+          <img id="knappen" src="button.png" />
+        </div>
+      </div>
+
+      <div class="mjolkvatten" id="grazimille">
+        <h2>Tack <span id="tacknamn"></span>!</h2>
+        <p>
+          Genom att du nu tryckt på knappen så hjälper du oss i arbetet med att
+          planera och säkerställa klubbens framtid och göra den så bra som vi
+          gemensamt vill ha den. Om du har en polare, kusin, granne, syster
+          eller farsa som också har säsongskort; uppmana dem att göra som du! Vi
+          kommer behöva allas stöd i detta arbete.
+        </p>
+        <p>
+          För stunden får du ett innerligt och genuint TACK från oss på Hammarby
+          Fotboll. Du kommer att bli ihågkommen och vi kommer att visa vår
+          uppskattning för dig och alla andra som valde att stå kvar när vi
+          behövde dig som mest. Håll till godo!
+        </p>
+        <p>
+          <b>Tack!</b><br />
+          <b>Vi ses snart igen!</b>
+        </p>
+        <p>
+          <!--  Bajen-logga i botten av Tack-blocket: -->
+          <center><img src="logo-thnx.png" /></center>
+        </p>
+      </div>
+
+      <div class="mjolkvatten" id="supporterinitiativ">
+        <h2>Jag står kvar!</h2>
+        <p>
+          Om du brinner för att göra mer för klubben så öppnar vi nu för
+          supportrar att samordna sina auktioner, donationer, ransoner,
+          kreationer eller andra fasoner under parollen "Jag står kvar!"
+        </p>
+        <p>
+          På den här sidan kommer vi framåt att belysa de initiativ som tas för
+          att visa kraften hos rötterna - när det blåser som hårdast.
+        </p>
+        <p>
+          Men nu räknar vi ned! När nedräknaren når noll så släpps en mäktig
+          supporterhälsning som vi hoppas kan ge både kärlek, hopp och tro.
+        </p>
+
+        <!-- Nerräknaren: -->
+        <div id="tidaholm">
+          <img src="blurred.jpg" />
+          <div id="sistakvarten">
+            <span id="hours"></span>:<span id="minutes"></span>:<span
+              id="seconds"
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- I #preload lägger vi lite bilder som vi vill ska laddas till cache,
+      så det går snabbt att få dem när de faktiskt ska visas: -->
+    <div id="preload">
+      <img src="sasongsplat-customer.png" />
+      <img src="sasongsplat-card.png" />
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // Börja alltid i början efter reload av sajten:
+      window.onbeforeunload = function() {
+        window.scrollTo(0, 0);
+      };
+
+      // Om man klickar på "This is Söderstadion!"-skylten så scrollas man till
+      // Kindlunds video, med hjälp av den här funktionen:
+      function scrollToKindlund() {
+        $([document.documentElement, document.body]).animate(
+          {
+            scrollTop:
+              $("#kindlund").position().top - 20 - $("#topbar").height()
+          },
+          1000
+        );
+      }
+
+      // Efter färdigspelad Kindlundvideo så autoscrollas man till formuläret:
+      function scrollToFormblock() {
+        $([document.documentElement, document.body]).animate(
+          {
+            scrollTop: $("#formblock").position().top
+          },
+          1000
+        );
+      }
+
+      // Den här funktionen avgör om formulärsknappen ska vara aktiv eller ej.
+      // (Det beror på hur formuläret validerar.)
+      function validateButton() {
+        const gdpr = $("#gdprbox").is(":checked");
+        if (
+          $("#name").val() !== "" &&
+          $("#email").val() !== "" &&
+          $("#customer").val() !== "" &&
+          $("#card").val() !== "" &&
+          gdpr &&
+          $("#nameValidation").text() +
+            $("#emailValidation").text() +
+            $("#cardValidation").text() +
+            $("#customerValidation").text() ===
+            ""
+        ) {
+          $("#knappen").addClass("active");
+        } else {
+          $("#knappen").removeClass("active");
+        }
+      }
+
+      // Validera namninput:
+      function validateName() {
+        const name = $("#name").val();
+        if (name.trim() === "") {
+          $("#nameValidation").text("Du måste fylla i ditt namn.");
+        } else {
+          $("#nameValidation").text("");
+        }
+        validateButton();
+      }
+
+      // VAlidera epost-input:
+      function validateEmail() {
+        const email = $("#email")
+          .val()
+          .trim();
+        if (/^\S+@\S+$/.test(email) !== true) {
+          $("#emailValidation").text("Du måste ange en korrekt epostadress.");
+        } else {
+          $("#emailValidation").text("");
+        }
+        validateButton();
+      }
+
+      // Validera kundnummer.
+      // Om kortnumret är OK så validera om kobinationen är OK också.
+      function validateCustomer() {
+        const card = $("#card").val();
+        const customer = $("#customer").val();
+        if (/^[0-9]{7,8}$/.test(customer) !== true) {
+          $("#customerValidation").text(
+            "Ditt kundnummer är 7 eller 8 siffror långt och står på baksidan av ditt säsongskort."
+          );
+          $("#cardValidation").text("");
+        } else {
+          $("#customerValidation").text("");
+          if (/^[0-9]{10}$/.test(card) === true) {
+            validateCustomerCard();
+          }
+        }
+        validateButton();
+      }
+
+      // Validera kortnumret.
+      // Om kortnumret är OK så validera om kobinationen är OK också.
+      function validateCard() {
+        const card = $("#card").val();
+        const customer = $("#customer").val();
+        if (/^[0-9]{10}$/.test(card) !== true) {
+          $("#cardValidation").text(
+            "Ditt kortnummer är 10 siffror och står längst ner till höger på baksidan av ditt säsongskort."
+          );
+        } else {
+          $("#cardValidation").text("");
+          if (/^[0-9]{7,8}$/.test(customer) === true) {
+            validateCustomerCard();
+          }
+        }
+        validateButton();
+      }
+
+      // I det här objektet cache:ar vi promises av ajax-anrop för att testa
+      // kombinationen kundnummer-kortnummer, så att vi inte måste spamma
+      // servern med samma fråga flera gånger:
+      const customerCards = {};
+
+      // Validera kombinationen kundnummer-kortnummer:
+      function validateCustomerCard() {
+        const card = $("#card").val();
+        const customerId = $("#customer").val();
+        if (
+          /^[0-9]{10}$/.test(card) !== true ||
+          /^[0-9]{7,8}$/.test(customerId) !== true
+        ) {
+          validateButton();
+          return new Promise(function(resolve, reject) {
+            reject();
+          });
+        }
+        if (typeof customerCards[card + "-" + customerId] === "undefined") {
+          customerCards[card + "-" + customerId] = new Promise(function(
+            resolve,
+            reject
+          ) {
+            $.ajax(
+              "https://api.128deploy.com/jagstarkvar/" +
+                card +
+                "?customerId=" +
+                customerId,
+              {
+                dataType: "json",
+                success: function(data) {
+                  resolve(data);
+                },
+                error: function() {
+                  reject();
+                }
+              }
+            );
+          });
+        }
+        return customerCards[card + "-" + customerId].then(data => {
+          if (data.validCard === false) {
+            $("#cardValidation").text(
+              "Kortnumret överensstämmer inte med kundnumret. Dubbelkontrollera båda."
+            );
+          }
+          if (data.stands === true) {
+            $("#cardValidation").html(
+              "Det här kortet är redan registrerat.<br/>Tack för att du står kvar!"
+            );
+          }
+          validateButton();
+        });
+      }
+
+      // Simpelt mutex för att undvika flera samtidiga försök att registrera
+      // ett kort:
+      let submitFormLocked = false;
+
+      // Posta formuläret till server:
+      function submitForm() {
+        if (submitFormLocked) return;
+        submitFormLocked = true;
+
+        validateName();
+        validateEmail();
+        validateCustomer();
+        validateCard();
+        validateCustomerCard()
+          .then(function() {
+            const gdpr = $("#gdprbox").is(":checked");
+            if (
+              !gdpr ||
+              $("#nameValidation").text() +
+                $("#emailValidation").text() +
+                $("#cardValidation").text() +
+                $("#customerValidation").text() !==
+                ""
+            ) {
+              submitFormLocked = false;
+              return;
+            }
+
+            const name = $("#name")
+              .val()
+              .trim();
+            const email = $("#email")
+              .val()
+              .trim();
+            const customerId = $("#customer").val();
+            const card = $("#card").val();
+
+            $.ajax("https://api.128deploy.com/jagstarkvar/" + card, {
+              method: "POST",
+              data: JSON.stringify({
+                customerId,
+                name,
+                email
+              }),
+              dataType: "json",
+              success: function(data) {
+                if (data.successful) {
+                  showThanks(name);
+                } else {
+                  delete customerCards[card + "-" + customerId];
+                  validateCustomerCard();
+                }
+              },
+              complete: function() {
+                submitFormLocked = false;
+              }
+            });
+          })
+          .catch(() => {
+            submitFormLocked = false;
+          });
+      }
+
+      // Göm tack-blocket.
+      // Inträffar om man fokuserar på formuläret efter att redan ha signat
+      // upp ett kort:
+      function hideThanks() {
+        $("#grazimille").slideUp();
+      }
+
+      // Visa tackblocket.
+      function showThanks(name) {
+        updateCounter();
+        $("#tacknamn").text(name);
+
+        $("#grazimille").slideDown(600);
+        setTimeout(function() {
+          $([document.documentElement, document.body]).animate(
+            {
+              scrollTop: $("#supporterinitiativ").position().top
+            },
+            800
+          );
+        }, 100);
+      }
+
+      let countdownData = null;
+      let countdownTimestamp = null;
+
+      function synchronizeCountdown() {
+        $.ajax("https://api.128deploy.com/countdown/visessnartigen", {
+          success: function(data) {
+            countdownData = data;
+            countdownTimestamp = Math.round(new Date().getTime() / 1000);
+
+            updateCountdown();
+          }
+        });
+      }
+
+      // Uppdatera nerräkningen:
+      function updateCountdown() {
+        if (countdownData === null) return synchronizeCountdown();
+        const diffSinceCountdownTimestamp =
+          Math.round(new Date().getTime() / 1000) - countdownTimestamp;
+        const secondsLeft = countdownData.diff - diffSinceCountdownTimestamp;
+        if (secondsLeft <= 0) {
+          $("#hours").text("00");
+          $("#minutes").text("00");
+          $("#seconds").text("00");
+          if (countdownData.data === null) return synchronizeCountdown();
+          return countdownRelease(countdownData.data);
+        }
+
+        const hours = Math.floor(secondsLeft / 60 / 60);
+        const minutes = Math.floor((secondsLeft - hours * 60 * 60) / 60);
+        const seconds = Math.floor(
+          secondsLeft - hours * 60 * 60 - minutes * 60
+        );
+
+        $("#hours").text(("0" + hours).substr(-2));
+        $("#minutes").text(("0" + minutes).substr(-2));
+        $("#seconds").text(("0" + seconds).substr(-2));
+
+        setTimeout(updateCountdown, 1000);
+      }
+
+      // Funktionen som kör releasen efter countdown är klart:
+      function countdownRelease(str) {
+        var tag = document.createElement("script");
+        tag.src = str;
+        var firstScriptTag = document.getElementsByTagName("script")[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
+
+      const topBarElement = document.getElementById("topbar");
+
+      // Kindlunds videospelare:
+      var tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      var player;
+
+      function onYouTubeIframeAPIReady() {
+        updateCountdown();
+        player = new YT.Player("player", {
+          width: "100%",
+          height: "100%",
+          playerVars: { modestbranding: 1, rel: 0 },
+          videoId: "0Os4Wzo_3Rs",
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: onPlayerStateChange
+          }
+        });
+      }
+
+      function onPlayerReady(event) {}
+
+      function onPlayerStateChange(event) {
+        if (event.data === 0) {
+          player.seekTo(0);
+          player.stopVideo();
+          scrollToFormblock();
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+
+      // Uppdatera hur många kort som registrerats (barometern):
+
+      function updateCounter() {
+        $.ajax("https://api.128deploy.com/jagstarkvar/total", {
+          dataType: "json",
+          success: function(data) {
+            if (data.total) {
+              $("#barometersiffra").text(data.total);
+            }
+          },
+          error: function() {}
+        });
+      }
+
+      // Initiera allt:
+
+      $(document).ready(function() {
+        updateCounter();
+        $("#titleButton").click(scrollToKindlund);
+
+        $("#knappen").click(submitForm);
+
+        $("#name").focus(hideThanks);
+        $("#email").focus(hideThanks);
+        $("#customer").focus(hideThanks);
+        $("#card").focus(hideThanks);
+
+        $("#customer")
+          .focus(function() {
+            $("#sasongsplat").attr("src", "sasongsplat-customer.png");
+          })
+          .blur(function() {
+            $("#sasongsplat").attr("src", "sasongsplat.png");
+          });
+
+        $("#card")
+          .focus(function() {
+            $("#sasongsplat").attr("src", "sasongsplat-card.png");
+          })
+          .blur(function() {
+            $("#sasongsplat").attr("src", "sasongsplat.png");
+          });
+
+        $("#name").on("input", validateName);
+        $("#email").change(validateEmail);
+        $("#customer").on("input", validateCustomer);
+        $("#card").on("input", validateCard);
+        $("#gdprbox").change(validateButton);
+
+        $(window).one("scroll", function() {
+          $("#topbar").animate(
+            {
+              top: "0px"
+            },
+            400
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
