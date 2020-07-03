@@ -260,27 +260,6 @@
       }
 
       /*
-         Nerräknare till topphemligt släpp 09:00 på lördag.
-      */
-
-      div#tidaholm {
-        position: relative;
-        color: #fff;
-        text-align: center;
-        font-size: 100px;
-        font-weight: 700;
-      }
-      div#tidaholm img {
-        width: 100%;
-      }
-      div#tidaholm div#sistakvarten {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      /*
          Tack efter att man reggat sig.
       */
 
@@ -332,9 +311,6 @@
           display: grid;
           grid-template-columns: 100%;
         }
-        div#tidaholm {
-          font-size: 40px;
-        }
         #jagstarkvar .validation {
           text-align: left;
           display: block;
@@ -370,8 +346,13 @@
   </head>
   <body>
     <div id="topbar">
-      <a href="https://www.hammarbyfotboll.se/"><img src="logo.png" /></a>
-      <span><a href="https://www.hammarbyfotboll.se/aktuellt/nyheter/hammarby-vadjar-om-att-sta-kvar-sa-ses-vi-snart-igen/">Vi ses snart igen!</a></span>
+      <a href="https://www.hammarbyfotboll.se/"><img src="logo.png"/></a>
+      <span
+        ><a
+          href="https://www.hammarbyfotboll.se/aktuellt/nyheter/hammarby-vadjar-om-att-sta-kvar-sa-ses-vi-snart-igen/"
+          >Vi ses snart igen!</a
+        ></span
+      >
     </div>
 
     <div id="soderstadion">
@@ -490,28 +471,32 @@
       <div class="mjolkvatten" id="supporterinitiativ">
         <h2>Jag står kvar!</h2>
         <p>
-          Om du brinner för att göra mer för klubben så öppnar vi nu för
-          supportrar att samordna sina auktioner, donationer, ransoner,
-          kreationer eller andra fasoner under parollen "Jag står kvar!"
+          Denna produktion har tagits fram kostnadsfritt av supportrar för
+          supporterinitiativet JAG STÅR KVAR.
         </p>
         <p>
-          På den här sidan kommer vi framåt att belysa de initiativ som tas för
-          att visa kraften hos rötterna - när det blåser som hårdast.
+          Alla intäkter från denna låt går oavkortat till Hammarby Fotboll.
         </p>
         <p>
-          Men nu räknar vi ned! När nedräknaren når noll så släpps en mäktig
-          supporterhälsning som vi hoppas kan ge både kärlek, hopp och tro.
+          Tack till alla supportrar och alla som väljer att stå kvar i denna
+          svåra tid.
+        </p>
+        <p>
+          Det är vi som är Hammarby.
         </p>
 
-        <!-- Nerräknaren: -->
-        <div id="tidaholm">
-          <img src="blurred.jpg" />
-          <div id="sistakvarten">
-            <span id="hours"></span>:<span id="minutes"></span>:<span
-              id="seconds"
-            ></span>
-          </div>
-        </div>
+        <p>
+          <iframe
+            src="https://open.spotify.com/embed/album/5cA0RECbEt0taP0JvwvgTo"
+            width="300"
+            height="380"
+            frameborder="0"
+            allowtransparency="true"
+            allow="encrypted-media"
+          ></iframe>
+        </p>
+
+        <div id="mv"></div>
       </div>
     </div>
 
@@ -785,57 +770,6 @@
         }, 100);
       }
 
-      let countdownData = null;
-      let countdownTimestamp = null;
-
-      function synchronizeCountdown() {
-        $.ajax("https://api.128deploy.com/countdown/visessnartigen", {
-          success: function(data) {
-            countdownData = data;
-            countdownTimestamp = Math.round(new Date().getTime() / 1000);
-            updateCountdown();
-          },
-          error: function() {
-            setTimeout(synchronizeCountdown, 1000);
-          }
-        });
-      }
-
-      // Uppdatera nerräkningen:
-      function updateCountdown() {
-        if (countdownData === null) return synchronizeCountdown();
-        const diffSinceCountdownTimestamp =
-          Math.round(new Date().getTime() / 1000) - countdownTimestamp;
-        const secondsLeft = countdownData.diff - diffSinceCountdownTimestamp;
-        if (secondsLeft <= 0) {
-          $("#hours").text("00");
-          $("#minutes").text("00");
-          $("#seconds").text("00");
-          if (countdownData.data === null) return synchronizeCountdown();
-          return countdownRelease(countdownData.data);
-        }
-
-        const hours = Math.floor(secondsLeft / 60 / 60);
-        const minutes = Math.floor((secondsLeft - hours * 60 * 60) / 60);
-        const seconds = Math.floor(
-          secondsLeft - hours * 60 * 60 - minutes * 60
-        );
-
-        $("#hours").text(("0" + hours).substr(-2));
-        $("#minutes").text(("0" + minutes).substr(-2));
-        $("#seconds").text(("0" + seconds).substr(-2));
-
-        setTimeout(updateCountdown, 1000);
-      }
-
-      // Funktionen som kör releasen efter countdown är klart:
-      function countdownRelease(str) {
-        var tag = document.createElement("script");
-        tag.src = str;
-        var firstScriptTag = document.getElementsByTagName("script")[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      }
-
       const topBarElement = document.getElementById("topbar");
 
       // Kindlunds videospelare:
@@ -846,7 +780,17 @@
       var player;
 
       function onYouTubeIframeAPIReady() {
-        updateCountdown();
+        mvPlayer = new YT.Player("mv", {
+          width: "100%",
+          height: "80%",
+          playerVars: { modestbranding: 1, rel: 0 },
+          videoId: "xgnKl8w5Qyw",
+          events: {
+            onReady: onMvPlayerReady,
+            onStateChange: onMvPlayerStateChange
+          }
+        });
+
         player = new YT.Player("player", {
           width: "100%",
           height: "100%",
@@ -870,6 +814,20 @@
       }
       function stopVideo() {
         player.stopVideo();
+      }
+
+      var mvPlayer;
+
+      function onMvPlayerReady(event) {}
+
+      function onMvPlayerStateChange(event) {
+        if (event.data === 0) {
+          mvPlayer.seekTo(0);
+          mvPlayer.stopVideo();
+        }
+      }
+      function stopMvVideo() {
+        mvPlayer.stopVideo();
       }
 
       // Uppdatera hur många kort som registrerats (barometern):

@@ -13,7 +13,7 @@ function stopMvVideo() {
 }
 
 $(document).ready(function() {
-  $("#tidaholm").before('<div id="mv"></div>');
+  $("#tidaholm").before('');
   $("#tidaholm").hide();
   mvPlayer = new YT.Player("mv", {
     width: "100%",
